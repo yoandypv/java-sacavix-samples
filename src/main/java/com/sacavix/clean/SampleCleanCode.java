@@ -121,9 +121,46 @@ public class SampleCleanCode {
 
     ///# 7- Desacopla las clases y métodos, sigue el principio de responsabilidad única.
 
+    // INCORRECTO
+    class CInvoice {
+        public String productName;
+        public BigDecimal amount;
+        private final BigDecimal TAX = new BigDecimal("0.21");
 
+        //setters y getters
+
+        public BigDecimal calculateTaxes() {
+            return amount.multiply(TAX);
+        }
+
+        public void saveInvoice() {
+            // llamada a la base para guardar
+        }
+    }
+
+    //CORRECTO
+    class Invoice {
+        public String productName;
+        public BigDecimal amount;
+        private final BigDecimal TAX = new BigDecimal("0.21");
+
+        //setters y getters
+
+        public BigDecimal calculateTaxes() {
+            return amount.multiply(TAX);
+        }
+    }
+
+    class InvoiceRepository {
+        public void save(Invoice invoice) {
+            // llamada a la base para guardar
+        }
+    }
 
     // 8- Minimiza la anidación; prefiere la salida temprana.
+    
+
+
     // 9- Mantén clases y métodos cohesivos.
     // 10-  Escribe y mantén pruebas unitarias para asegurar la calidad.
 
