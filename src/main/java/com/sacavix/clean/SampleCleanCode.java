@@ -157,12 +157,74 @@ public class SampleCleanCode {
         }
     }
 
-    // 8- Minimiza la anidación; prefiere la salida temprana.
-    
+    ///# 8- Minimiza la anidación; prefiere la salida temprana.
+
+    // INCORRECTO
+    public void procesarDatosIncorrecto(String input) {
+        if (input != null) {
+            if (!input.isEmpty()) {
+                if (input.length() > 5) {
+                    System.out.println("Procesando datos: " + input);
+                } else {
+                    System.out.println("Error: El input debe tener más de 5 caracteres.");
+                }
+            } else {
+                System.out.println("Error: El input está vacío.");
+            }
+        } else {
+            System.out.println("Error: El input es null.");
+        }
+    }
 
 
-    // 9- Mantén clases y métodos cohesivos.
-    // 10-  Escribe y mantén pruebas unitarias para asegurar la calidad.
+    // CORRECTO
+    public void procesarDatosCorrecto(String input) {
+        if (input == null) {
+            System.out.println("Error: El input es null.");
+            return;
+        }
+
+        if (input.isEmpty()) {
+            System.out.println("Error: El input está vacío.");
+            return;
+        }
+
+        if (input.length() <= 5) {
+            System.out.println("Error: El input debe tener más de 5 caracteres.");
+            return;
+        }
+
+        System.out.println("Procesando datos: " + input);
+    }
+
+
+    ///# 9- Mantén clases y métodos cohesivos.
+
+    //INCORRECTO
+    public void imprimirTipoNumero(int numero) {
+        if (numero > 0) {
+            System.out.println("Número positivo: " + numero);
+        } else {
+            System.out.println("Número no es positivo o es cero");
+        }
+    }
+
+    // CORRECTO
+    public boolean esPositivo(int numero) {
+        return numero > 0;
+    }
+
+    public void imprimirNumero(int numero) {
+        if (esPositivo(numero)) {
+            System.out.println("Número positivo: " + numero);
+        } else {
+            System.out.println("Número no es positivo o es cero");
+        }
+    }
+
+
+
+    ///# 10-  Escribe y mantén pruebas unitarias para asegurar la calidad.
 
     public static void main(String[] args) {
 
